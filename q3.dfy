@@ -9,7 +9,7 @@ function gcd(a: nat, b: nat): nat
 
 // Helper predicates
 predicate divides(a: nat, b: nat)
-    requires a > 0 && b > 0 
+    requires a > 0
 {
     exists c :: b == c * a
 }
@@ -24,9 +24,9 @@ lemma bezout(p: nat, q: nat, x: int, y: int)
 }
 
 lemma corectness(a: nat, b: nat, c: nat)
-    requires a > 0 && b > 0 && c > 0
+    requires a > 0 && b > 0
     requires gcd(a,b) == 1
-    requires divides(a,b*c)
+    requires divides(a, c*b)
     ensures divides(a,c)
 {
     var x: int;
@@ -34,6 +34,7 @@ lemma corectness(a: nat, b: nat, c: nat)
     bezout(a,b,x,y);
 
     var k4 :| b*c == k4*a;
+    var k5 := x*c + k4*y;
     
     calc == {
         a*x + b*y;
@@ -50,6 +51,6 @@ lemma corectness(a: nat, b: nat, c: nat)
         }
         a*x*c + k4*a*y;
         a*(x*c + k4*y);
+        k5 * a;
     }
-    assert divides((x*c + k4*y), c)
 }
