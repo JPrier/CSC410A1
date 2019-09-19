@@ -65,15 +65,13 @@ lemma quotientRemainder(a: nat, b: nat)
     }
 }
 
-
-
 // Bezout identity lemma
 lemma bezout(a: nat, b: nat, x: int, y: int)
     requires a > 0 && b > 0 
     ensures a*x + b*y == gcd(a,b)
 {
     var k :| 0 < k;
-    if b == 0
+    if b == 0 // BASE CASE
     {
         assert forall x :: x >= 1 ==> gcd(x, 0) == x;
         assert a >= 1;
@@ -90,13 +88,14 @@ lemma bezout(a: nat, b: nat, x: int, y: int)
         var x, y :| a*x + b*y == a;
         assert a*x + b*y == gcd(a, b);
     }
-    else
+    else // INDUCTION STEP
     {
-        var b' := b + 1;
+        // ASSUME FOR b, NOW PROVE FOR b + 1
         bezout(a, b, x, y);
+        var b' := b + 1;
         quotientRemainder(a, b');
         var q, r :| a == (q * b') + r;
-        assert r == a - (q * b);
+        assert r == a - (q * b');
         var p := q*x + y;
         calc == {
             gcd(a, b');
@@ -109,10 +108,18 @@ lemma bezout(a: nat, b: nat, x: int, y: int)
             gcd(b', r);
         }
         var m, n :| b'*m + r*n == gcd(b', r);
+        var x0 := n;
+        var y0 := (m - q*n);
         calc == {
-            
+            gcd(b', r);
+            b'*m + r*n;
+            b'*m + (a - (q * b'))*n;
+            b'*m + a*n - q*b'*n;
+            a*n + b'*(m - q*n);
+            a*x0 + b'*y0;
+            gcd(a, b');
         }
-
+        assert b' > b;
     }
 }
 
