@@ -1,4 +1,4 @@
-include "gcd.dfy"
+include "./gcd.dfy"
 
 lemma SubCancelation(a: nat, b: nat, m: nat)
     requires a > 0 && b > 0
@@ -6,6 +6,7 @@ lemma SubCancelation(a: nat, b: nat, m: nat)
     ensures m * b < a ==> gcd(a - m * b, b) == gcd(a,b)
 {  
     if m == 1 {
+        assert m*b == b;
         if a < b {
             subtractive(a, b);
             calc == {
@@ -22,6 +23,7 @@ lemma SubCancelation(a: nat, b: nat, m: nat)
     } if m > 1 {
         if m*b > a {
             assert m > 1;
+            assert m*b - a > 0;
             SubCancelation(a,b,m-1);
             assert gcd(a,b) == gcd((m-1)*b - a, b); //How do i put this as an assumption for induction hypoth
             additive1(a, b, m);
