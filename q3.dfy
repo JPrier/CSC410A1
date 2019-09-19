@@ -29,11 +29,15 @@ lemma quotientRemainder(a: nat, b: nat)
     }
     else
     {
-        assert a > 0;
-        quotientRemainder(a - 1, b);
-
+        var q, r :| a - 1 == (q * b) + r;
+        if r == b - 1 {
+            assert quotientRemainderPredicate(a, b, (q + 1), 0);
+        }
+        else {
+        }
     }
 }
+
 
 // Bezout identity lemma
 lemma bezout(p: nat, q: nat, x: int, y: int)
