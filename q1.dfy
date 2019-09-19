@@ -1,4 +1,4 @@
-include "./gcd.dfy"
+include "gcd.dfy"
 
 lemma SubCancelation(a: nat, b: nat, m: nat)
     requires a > 0 && b > 0
