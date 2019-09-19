@@ -105,12 +105,13 @@ lemma bezout(a: nat, b: nat, x: int, y: int)
             q*b'*x + r*x + b'*y;
             q*b'*x + b'*y + r*x;
             b'*((q*x) + y) + r*x;
-            b'*((q*x) + y) + (a - (q*b))*x;
-
+            r*x + b'*((q*x) + y);
             gcd(b', r);
         }
         var m, n :| b'*m + r*n == gcd(b', r);
-        assert b'*m + r*n == gcd(a, b);
+        calc == {
+            
+        }
 
     }
 }
