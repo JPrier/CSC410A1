@@ -25,7 +25,7 @@ lemma SubCancelation(a: nat, b: nat, m: nat)
             assert m > 1;
             assert m*b - a > 0;
             SubCancelation(a,b,m-1);
-            assert gcd(a,b) == gcd((m-1)*b - a, b); //How do i put this as an assumption for induction hypoth
+            assert gcd(a,b) == gcd((m-1)*b - a, b);
             additive1(a, b, m);
             calc == {
                 gcd(a,b);

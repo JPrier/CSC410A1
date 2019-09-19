@@ -12,15 +12,15 @@ function gcd(a: nat, b: nat): nat
 //  You just prove the statements as they are like the ones below.
 
 // EX 1
-lemma additive(a: nat, b: nat)
-   requires a > 0 && b > 0
-   ensures gcd(a ,b) == gcd(a, a + b)
+// lemma additive(a: nat, b: nat)
+//    requires a > 0 && b > 0
+//    ensures gcd(a ,b) == gcd(a, a + b)
    
 
-lemma subtractive(a: nat, b: nat)
-    requires a > 0 && b > 0
-    ensures a > b ==> gcd(a,b) == gcd(a, a - b)
-    ensures a < b ==> gcd(a,b) == gcd(b - a, b)
+// lemma subtractive(a: nat, b: nat)
+//     requires a > 0 && b > 0
+//     ensures a > b ==> gcd(a,b) == gcd(a, a - b)
+//     ensures a < b ==> gcd(a,b) == gcd(b - a, b)
 
 
 // EX 2
